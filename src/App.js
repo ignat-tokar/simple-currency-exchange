@@ -6,77 +6,92 @@ import { API_KEY } from './key';
 
 function App() {
 
-  const [USD, setUSD] = useState(0);
-  const [UAH, setUAH] = useState(0);
-  const [EUR, setEUR] = useState(0);
+  const [selectFrom, setSelectFrom] = useState('value1');
+  const [selectTo, setSelectTo] = useState('value1');
+
+  const [from, setFrom] = useState(0);
+  const [to, setTo] = useState(0);
+
+  const [eur, setEur] = useState(0);
+  const [uah, setUah] = useState(0);
 
   useEffect(()=>{
-    getConvertResult("USD", "UAH", USD); 
-    getConvertResult("USD", "EUR", USD); 
-  }, [USD]);
-
-  // useEffect(()=>{
-  //   getConvertResult("UAH", "USD", UAH); 
-  //   getConvertResult("UAH", "EUR", UAH); 
-  // }, [UAH]);  
-
-  // useEffect(()=>{
-  //   getConvertResult("EUR", "USD", EUR); 
-  //   getConvertResult("EUR", "UAH", EUR); 
-  // }, [EUR]);   
-
-  const getConvertResult = (from, to, amount) => {
     axios
-      .get(`https://api.apilayer.com/currency_data/convert?from=${from}&to=${to}&amount=${amount}`, {
-        headers: {
-          'apikey': API_KEY
-        }
+      .get("https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd/eur.json")
+      .then(data=>{
+        setEur(data.data.eur);
+        console.log(eur);
+      });
+    axios
+      .get("https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd/uah.json")
+      .then(data=>{
+        setUah(data.data.uah);
+        console.log(uah);
       })
-      .then(response => {
-        switch (to) { 
-          case "USD": 
-            setUSD(response.data.result);
-            break;
-          case "UAH": 
-            setUAH(response.data.result);
-            break;       
-          case "EUR": 
-            setEUR(response.data.result);
-            break;                  
-          default:
-            break;
-        }
-      })
+
+  }, []);
+
+  useEffect(()=>{
+    convertationFromTo();
+  }, [from, selectFrom]);
+  useEffect(()=>{
+    convertationToFrom();
+  }, [to, selectTo]);  
+
+  const convertationFromTo = () => {
+
   }
 
-  const changeHandlerUAH = (e) => setUAH(e.target.value);
-  const changeHandlerUSD = (e) => setUSD(e.target.value);
-  const changeHandlerEUR = (e) => setEUR(e.target.value);
+  const convertationToFrom = () => {
+
+  }
+
+  const onSelectFromHandler = (e) => {
+    console.log(e.target.value);
+    setSelectFrom(e.target.value);
+  }
+
+  const onSelectToHandler = (e) => {
+    setSelectTo(e.target.value);
+  }
+
+  const onFromHandler = (e) => {
+    setFrom(e.target.value);
+  }
+
+  const onToHandler = (e) => {
+    setTo(e.target.value);
+  }
 
   return (
     <div className="App">
       <header className="App-header">
-        <h2>USD</h2>
-        <input 
-          type="number" 
-          placeholder="USD"
-          value={USD}
-          onChange={changeHandlerUSD}
-        />
-        <h2>UAH</h2>
-        <input 
-          type="number" 
-          placeholder="UAH"
-          value={UAH}
-          onChange={changeHandlerUAH}
-        />
-        <h2>EUR</h2>
-        <input 
-          type="number" 
-          placeholder="EUR"
-          value={EUR}
-          onChange={changeHandlerEUR}
-        />        
+        <div>
+          <h1>Select "from" currency</h1>
+          <select
+            name="from"
+            value={selectFrom}
+            onChange={onSelectFromHandler}
+          >
+            <option value="USD">USD</option>
+            <option value="UAH" selected>UAH</option>
+            <option value="EUR">EUR</option>
+          </select>
+          <input type="number" value={from} onChange={onFromHandler} />
+        </div>
+        <div>
+          <h1>Select "to" currency</h1>
+          <select
+            name="to"
+            value={selectTo}
+            onChange={onSelectToHandler}
+          >
+            <option value="USD">USD</option>
+            <option value="UAH" selected>UAH</option>
+            <option value="EUR">EUR</option>
+          </select>
+          <input type="number" value={to} onChange={onToHandler} />
+        </div>
       </header>
     </div>
   );
