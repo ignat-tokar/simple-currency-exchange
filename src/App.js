@@ -14,11 +14,15 @@ function App() {
   const [isFrom, setIsFrom] = useState(false);
   const [isTo, setIsTo] = useState(false);
 
+  const roundFunc = (num) => {
+    return Math.round(num*100)/100;
+  }
+
   const convertationFrom = () => {
     axios
       .get(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${selectFrom}/${selectTo}.json`)
       .then(data=>{
-        setTo(data.data[selectTo]*from);
+        setTo(roundFunc(data.data[selectTo]*from));
       });
   }
 
@@ -26,7 +30,7 @@ function App() {
     axios
       .get(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${selectTo}/${selectFrom}.json`)
       .then(data=>{
-        setFrom(data.data[selectFrom]*to);
+        setFrom(roundFunc(data.data[selectFrom]*to));
       });
   }  
 
