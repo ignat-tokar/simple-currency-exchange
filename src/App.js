@@ -11,6 +11,9 @@ function App() {
   const [from, setFrom] = useState(0);
   const [to, setTo] = useState(0);
 
+  const [isFrom, setIsFrom] = useState(false);
+  const [isTo, setIsTo] = useState(false);
+
   const convertationFrom = () => {
     axios
       .get(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${selectFrom}/${selectTo}.json`)
@@ -29,29 +32,36 @@ function App() {
 
   const onSelectFromHandler = (e) => {
     setSelectFrom(e.target.value);
-    convertationFrom();
+    setIsFrom(true);
   }
 
   const onSelectToHandler = (e) => {
     setSelectTo(e.target.value);
-    convertationTo();
+    setIsTo(true);
   }
 
   const onFromHandler = (e) => {
     setFrom(e.target.value);
-    convertationFrom();
+    setIsFrom(true);
   }
 
   const onToHandler = (e) => {
     setTo(e.target.value);
+    setIsTo(true);
+  }
+
+  if(isFrom) {
+    convertationFrom();
+    setIsFrom(false);
+  } else if (isTo) {
     convertationTo();
+    setIsTo(false);
   }
 
   return (
     <div className="App">
       <header className="App-header">
-        <div>
-          <h1>Select "from" currency</h1>
+        <div className="Currency-block">
           <select
             name="from"
             value={selectFrom}
@@ -64,7 +74,6 @@ function App() {
           <input type="number" value={from} onChange={onFromHandler} />
         </div>
         <div>
-          <h1>Select "to" currency</h1>
           <select
             name="to"
             value={selectTo}
