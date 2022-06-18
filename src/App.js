@@ -2,65 +2,49 @@ import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { API_KEY } from './key';
 
 function App() {
 
-  const [selectFrom, setSelectFrom] = useState('value1');
-  const [selectTo, setSelectTo] = useState('value1');
+  const [selectFrom, setSelectFrom] = useState('usd');
+  const [selectTo, setSelectTo] = useState('uah');
 
   const [from, setFrom] = useState(0);
   const [to, setTo] = useState(0);
 
-  const [eur, setEur] = useState(0);
-  const [uah, setUah] = useState(0);
-
-  useEffect(()=>{
+  const convertationFrom = () => {
     axios
-      .get("https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd/eur.json")
+      .get(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${selectFrom}/${selectTo}.json`)
       .then(data=>{
-        setEur(data.data.eur);
-        console.log(eur);
+        setTo(data.data[selectTo]*from);
       });
+  }
+
+  const convertationTo = () => {
     axios
-      .get("https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd/uah.json")
+      .get(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${selectTo}/${selectFrom}.json`)
       .then(data=>{
-        setUah(data.data.uah);
-        console.log(uah);
-      })
-
-  }, []);
-
-  useEffect(()=>{
-    convertationFromTo();
-  }, [from, selectFrom]);
-  useEffect(()=>{
-    convertationToFrom();
-  }, [to, selectTo]);  
-
-  const convertationFromTo = () => {
-
-  }
-
-  const convertationToFrom = () => {
-
-  }
+        setFrom(data.data[selectFrom]*to);
+      });
+  }  
 
   const onSelectFromHandler = (e) => {
-    console.log(e.target.value);
     setSelectFrom(e.target.value);
+    convertationFrom();
   }
 
   const onSelectToHandler = (e) => {
     setSelectTo(e.target.value);
+    convertationTo();
   }
 
   const onFromHandler = (e) => {
     setFrom(e.target.value);
+    convertationFrom();
   }
 
   const onToHandler = (e) => {
     setTo(e.target.value);
+    convertationTo();
   }
 
   return (
@@ -73,9 +57,9 @@ function App() {
             value={selectFrom}
             onChange={onSelectFromHandler}
           >
-            <option value="USD">USD</option>
-            <option value="UAH" selected>UAH</option>
-            <option value="EUR">EUR</option>
+            <option value="usd">USD</option>
+            <option value="uah" selected>UAH</option>
+            <option value="eur">EUR</option>
           </select>
           <input type="number" value={from} onChange={onFromHandler} />
         </div>
@@ -86,9 +70,9 @@ function App() {
             value={selectTo}
             onChange={onSelectToHandler}
           >
-            <option value="USD">USD</option>
-            <option value="UAH" selected>UAH</option>
-            <option value="EUR">EUR</option>
+            <option value="usd">USD</option>
+            <option value="uah" selected>UAH</option>
+            <option value="eur">EUR</option>
           </select>
           <input type="number" value={to} onChange={onToHandler} />
         </div>
