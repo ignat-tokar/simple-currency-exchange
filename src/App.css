@@ -1,30 +1,38 @@
 body {
-  background-color: #15151b;
+  background-color: #146873; 
   width: 100%;
   margin: auto;
 }
 
 .App {
   text-align: center;
-  background-color: #15151b;
+  background-color: #146873;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #81fdf9;
 }
 
 header {
-  background-color: #020205;
+  background-color: #0C373D;
   width: 100%;
   padding-top: 2.5%;
   padding-bottom: 2.5%;
 }
-
+.Info-wrapper {
+  width: 50%;
+  margin: auto;
+}
 span {
+  float: left;
   margin-right: 10%;
-  text-align: center;
+}
+.Currency-wrapper {
+  width: 50%;
+  margin: auto;
+  margin-top: 40pt;
 }
 
 .Currency-block {
@@ -32,11 +40,38 @@ span {
 }
 
 select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
   font-size: 20pt;
-  margin-right: 5%;
+  padding: 10pt 10pt;
+  border-radius: 5pt;
+  background-color: #0C373D;
+  color: #81fdf9;
+}
+
+select:after {
+  content: "";
+  display: block;
 }
 
 input {
-  font-size: 20pt;
+  outline: none;
+  border: none;
+  background-color: #0C373D;
+  color:#81fdf9;
+  padding: 7pt;
+  font-size: 25pt;
+  margin-left: 30pt;
+  border-radius: 5pt;
 }
 
+input[type='number'] {
+  -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}

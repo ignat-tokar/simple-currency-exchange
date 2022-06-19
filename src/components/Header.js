@@ -1,8 +1,10 @@
 function Header({ usdInfo, eurInfo }) {
   return (
     <header>
-      <span>USD: {usdInfo}</span>
-      <span>EUR: {eurInfo}</span>
+      <div className="Info-wrapper">
+        <span>USD: {usdInfo}</span>
+        <span>EUR: {eurInfo}</span>
+      </div>
     </header>
   );
 }
