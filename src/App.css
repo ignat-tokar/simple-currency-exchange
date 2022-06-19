@@ -1,22 +1,24 @@
 body {
-  background-color: #146873; 
+  /* background-color: #31a08f;  */
   width: 100%;
   margin: auto;
 }
 
 .App {
   text-align: center;
-  background-color: #146873;
+  background-color: #8DF5E7;
+  background-image: url('./assets/background.png');
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: #81fdf9;
+  color: #8DF5E7;
 }
 
 header {
-  background-color: #0C373D;
+  background-color: #2f2f2f;
   width: 100%;
   padding-top: 2.5%;
   padding-bottom: 2.5%;
@@ -28,6 +30,17 @@ header {
 span {
   float: left;
   margin-right: 10%;
+}
+a {
+  background-color: #8DF5E7; 
+  color:#2f2f2f;
+  padding: 10pt;
+  text-decoration: none;
+  border-radius: 5pt;
+}
+a:hover {
+  background-color: #2f2f2f; 
+  color:#8DF5E7;
 }
 .Currency-wrapper {
   width: 50%;
@@ -47,8 +60,8 @@ select {
   font-size: 20pt;
   padding: 10pt 10pt;
   border-radius: 5pt;
-  background-color: #0C373D;
-  color: #81fdf9;
+  background-color: #2f2f2f;
+  color: #8DF5E7;
 }
 
 select:after {
@@ -59,10 +72,10 @@ select:after {
 input {
   outline: none;
   border: none;
-  background-color: #0C373D;
-  color:#81fdf9;
-  padding: 7pt;
-  font-size: 25pt;
+  background-color: #2f2f2f;
+  color:#8DF5E7;
+  padding: 10pt 10pt;
+  font-size: 20pt;
   margin-left: 30pt;
   border-radius: 5pt;
 }

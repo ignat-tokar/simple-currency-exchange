@@ -5,6 +5,7 @@ function Header({ usdInfo, eurInfo }) {
         <span>USD: {usdInfo}</span>
         <span>EUR: {eurInfo}</span>
       </div>
+      <a href="https://github.com/ignat-tokar/simple-currency-exchange">Browse code</a>
     </header>
   );
 }
