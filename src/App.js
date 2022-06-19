@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function App() {
@@ -12,6 +12,24 @@ function App() {
 
   const [isFrom, setIsFrom] = useState(false);
   const [isTo, setIsTo] = useState(false);
+
+  const [usdInfo, setUsdInfo] = useState(0);
+  const [eurInfo, setEurInfo] = useState(0);
+
+  useEffect(()=>getStartInfo(), []);
+
+  const getStartInfo = () => {
+    axios
+      .get('https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/eur/uah.json')
+      .then(data=>{
+        setEurInfo(roundFunc(data.data.uah));
+      });    
+    axios
+      .get('https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd/uah.json')
+      .then(data=>{
+        setUsdInfo(roundFunc(data.data.uah));
+      })
+  }
 
   const roundFunc = (num) => {
     return Math.round(num*100)/100;
@@ -35,12 +53,12 @@ function App() {
 
   const onSelectFromHandler = (e) => {
     setSelectFrom(e.target.value);
-    setIsFrom(true);
+    setIsTo(true);
   }
 
   const onSelectToHandler = (e) => {
     setSelectTo(e.target.value);
-    setIsTo(true);
+    setIsFrom(true);
   }
 
   const onFromHandler = (e) => {
@@ -65,6 +83,13 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div className="Currency-block">
+
+          <div style={{paddingBottom: "40pt"}}>
+            <span>USD: {usdInfo}</span>
+            <span> || </span>
+            <span>EUR: {eurInfo}</span>
+          </div>
+
           <select
             name="from"
             value={selectFrom}
