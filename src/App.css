@@ -1,22 +1,42 @@
+body {
+  background-color: #15151b;
+  width: 100%;
+  margin: auto;
+}
+
 .App {
   text-align: center;
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #15151b;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;  
+  color: white;
 }
 
-select {
-  font-size: 20pt;
+header {
+  background-color: #020205;
+  width: 100%;
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
 }
-input {
-  font-size: 20pt;
+
+span {
+  margin-right: 10%;
+  text-align: center;
 }
 
 .Currency-block {
   padding-bottom: 20pt;
 }
+
+select {
+  font-size: 20pt;
+  margin-right: 5%;
+}
+
+input {
+  font-size: 20pt;
+}
+
